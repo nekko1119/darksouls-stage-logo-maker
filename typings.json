@@ -1,0 +1,8 @@
+{
+  "name": "darksouls-stage-logo-maker",
+  "dependencies": {},
+  "globalDevDependencies": {
+    "react": "registry:dt/react#0.14.0+20161117000655",
+    "react-dom": "registry:dt/react-dom#0.14.0+20160412154040"
+  }
+}
