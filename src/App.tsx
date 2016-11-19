@@ -55,6 +55,12 @@ class App extends React.Component<void, State> {
         return (
             <div className="container">
                 <h1>DARK SOULS風にステージロゴを画像に重ねる</h1>
+                <div
+                    className="alert alert-warning"
+                    role="alert"
+                >
+                    未完成！
+                </div>
                 <input
                     id={App.inputId}
                     type="file"
