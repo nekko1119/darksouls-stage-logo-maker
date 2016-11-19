@@ -1,13 +1,19 @@
 import * as React from "react";
 import * as ReactDOM from "react-dom";
+import * as TextInput from "./TextInput";
+
 import "bootstrap/dist/css/bootstrap.css";
 
 interface State {
-    dataUrl?: string
+    dataUrl?: string;
+    stage?: string;
 };
 
 const Preview = ({dataUrl}: {dataUrl?: string}) => (
-    dataUrl ? <img src={dataUrl} width={480} /> : null!
+    // workaround
+    // react的にはnullは許可されているが、typescript2系では不許可されている不具合がある
+    // nullをnullではないと表明することで対処できる
+    dataUrl ? <img src={dataUrl} className="img-thumbnail" /> : null!
 );
 
 class App extends React.Component<void, State> {
@@ -17,6 +23,13 @@ class App extends React.Component<void, State> {
     constructor() {
         super();
         this.state = {};
+    }
+
+    private handleTextChange = (e: any) => {
+        const text = e.target.value;
+        this.setState({
+            stage: text
+        });
     }
 
     private handleImageSelect = (e: any) => {
@@ -41,7 +54,7 @@ class App extends React.Component<void, State> {
     render() {
         return (
             <div className="container">
-                <h1>DARK SOULS風ステージロゴを画像に重ねる</h1>
+                <h1>DARK SOULS風にステージロゴを画像に重ねる</h1>
                 <input
                     id={App.inputId}
                     type="file"
@@ -49,15 +62,26 @@ class App extends React.Component<void, State> {
                     style={{ display: "none" }}
                     accept="image/*"
                 />
-                <button
-                    type="button"
-                    className="btn btn-default"
-                    onClick={this.forwardImageSelect}
-                >
-                    画像を選択
-                </button>
-                <p>YOU DIED</p>
-                <Preview dataUrl={this.state.dataUrl} />
+                <div className="row">
+                    <div className="col-md-4">
+                        <div className="form-group">
+                            <button
+                                type="button"
+                                className="btn btn-primary form-group"
+                                onClick={this.forwardImageSelect}
+                            >
+                                画像を選択
+                            </button>
+                        </div>
+                        <TextInput.Component
+                            visible={!!this.state.dataUrl}
+                            onChange={this.handleTextChange}
+                        />
+                    </div>
+                    <div className="col-md-8">
+                        <Preview dataUrl={this.state.dataUrl} />
+                    </div>
+                </div>
             </div>
         );
     }
