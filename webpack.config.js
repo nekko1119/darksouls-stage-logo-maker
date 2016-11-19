@@ -2,14 +2,18 @@ const webpack = require('webpack');
 
 module.exports = {
     entry: [
-        'webpack-dev-server/client?http://localhost:8080',
         './src/App.tsx'
     ],
     cache: true,
     plugins: [
-        new webpack.HotModuleReplacementPlugin()
+        new webpack.HotModuleReplacementPlugin(),
+        new webpack.ProvidePlugin({
+            $: "jquery",
+            jQuery: "jquery"
+        })
     ],
     output: {
+        path: __dirname,
         filename: './dist/bundle.js'
     },
     resolve: {
@@ -38,6 +42,19 @@ module.exports = {
                 exclude: /node_modules/,
                 loaders: [
                     'babel'
+                ]
+            },
+            {
+                test: /\.css$/,
+                loaders: [
+                    'style',
+                    'css'
+                ]
+            },
+            {
+                test: /\.(ico|jpg|jpeg|png|gif|eot|svg|ttf|woff|woff2)(\?.*)?$/,
+                loaders: [
+                    'file?name=[path][name].[ext]'
                 ]
             }
         ]
