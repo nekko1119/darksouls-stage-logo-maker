@@ -6,7 +6,6 @@ module.exports = {
     ],
     cache: true,
     plugins: [
-        new webpack.HotModuleReplacementPlugin(),
         new webpack.ProvidePlugin({
             $: "jquery",
             jQuery: "jquery"
@@ -58,13 +57,5 @@ module.exports = {
                 ]
             }
         ]
-    },
-    devServer: {
-        port: 8080,
-        cache: true,
-        inline: true,
-        hot: true,
-        contentBase: '.',
-        publicPath: '/dist/'
     }
 };
