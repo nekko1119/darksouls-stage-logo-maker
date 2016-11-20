@@ -35,6 +35,11 @@ class App extends React.Component<void, State> {
     private handleImageSelect = (e: any) => {
         const image = e.target.files[0] as File;
         if (!image) {
+            // ファイルが選択されていないなら終了
+            return;
+        }
+        if (!image.type.startsWith("image/")) {
+            // 画像以外が選択されたなら終了
             return;
         }
         const reader = new FileReader();
