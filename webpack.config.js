@@ -1,8 +1,10 @@
 const webpack = require('webpack');
+const path = require('path');
 
 module.exports = {
     entry: [
-        './src/App.tsx'
+        './src/App.tsx',
+        'webpack-dev-server/client?http://localhost:3000'
     ],
     cache: true,
     plugins: [
@@ -12,8 +14,8 @@ module.exports = {
         })
     ],
     output: {
-        path: __dirname,
-        filename: './dist/bundle.js'
+        path: path.join(__dirname, '/dist'),
+        filename: 'bundle.js'
     },
     resolve: {
         extensions: ['', '.ts', '.tsx', '.js']
@@ -25,6 +27,12 @@ module.exports = {
                 exclude: /node_modules/,
                 loaders: [
                     'tslint'
+                ]
+            },
+            {
+                test: /\.js$/,
+                loaders: [
+                    'source-map'
                 ]
             }
         ],
@@ -57,5 +65,12 @@ module.exports = {
                 ]
             }
         ]
-    }
+    },
+    devServer: {
+        port: 3000,
+        publicPath: './dist'
+    },
+    devtool: [
+        'source-map'
+    ]
 };
