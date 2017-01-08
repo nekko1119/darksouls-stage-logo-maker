@@ -18,45 +18,14 @@ const Preview = ({dataUrl}: {dataUrl?: string}) => (
 
 class App extends React.Component<void, State> {
 
-    static inputId = "upload-file";
+    private static inputId = "upload-file";
 
     constructor() {
         super();
         this.state = {};
     }
 
-    private handleTextChange = (e: any) => {
-        const text = e.target.value;
-        this.setState({
-            stage: text
-        });
-    }
-
-    private handleImageSelect = (e: any) => {
-        const image = e.target.files[0] as File;
-        if (!image) {
-            // ファイルが選択されていないなら終了
-            return;
-        }
-        if (!image.type.startsWith("image/")) {
-            // 画像以外が選択されたなら終了
-            return;
-        }
-        const reader = new FileReader();
-        reader.onloadend = () => {
-            this.setState({
-                dataUrl: reader.result
-            });
-        };
-        reader.readAsDataURL(image.slice(0, image.size, image.type));
-    };
-
-    private forwardImageSelect = () => {
-        const element = document.getElementById(App.inputId);
-        element!.click();
-    };
-
-    render() {
+    public render() {
         return (
             <div className="container">
                 <h1>DARK SOULS風にステージロゴを画像に重ねる</h1>
@@ -96,6 +65,37 @@ class App extends React.Component<void, State> {
             </div>
         );
     }
+
+    private handleTextChange = (e: any) => {
+        const text = e.target.value;
+        this.setState({
+            stage: text,
+        });
+    }
+
+    private handleImageSelect = (e: any) => {
+        const image = e.target.files[0] as File;
+        if (!image) {
+            // ファイルが選択されていないなら終了
+            return;
+        }
+        if (!image.type.startsWith("image/")) {
+            // 画像以外が選択されたなら終了
+            return;
+        }
+        const reader = new FileReader();
+        reader.onloadend = () => {
+            this.setState({
+                dataUrl: reader.result,
+            });
+        };
+        reader.readAsDataURL(image.slice(0, image.size, image.type));
+    };
+
+    private forwardImageSelect = () => {
+        const element = document.getElementById(App.inputId);
+        element!.click();
+    };
 };
 
 const element = document.getElementById("app");

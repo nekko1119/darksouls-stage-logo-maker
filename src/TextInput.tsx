@@ -6,7 +6,7 @@ interface Props {
 };
 
 export class Component extends React.Component<Props, any> {
-    render() {
+    public render() {
         if (!this.props.visible) {
             // workaround
             // react的にはnullは許可されているが、typescript2系では不許可されている不具合がある
