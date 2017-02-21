@@ -10,10 +10,6 @@
   "author": "nekko1119",
   "license": "MIT",
   "devDependencies": {
-    "babel-core": "6.23.1",
-    "babel-loader": "6.3.2",
-    "babel-preset-es2015": "6.18.0",
-    "babel-preset-react": "6.16.0",
     "css-loader": "0.26.1",
     "file-loader": "0.9.0",
     "react-hot-loader": "3.0.0-beta.6",
@@ -21,13 +17,15 @@
     "style-loader": "0.13.1",
     "ts-loader": "2.0.0",
     "tslint": "4.4.2",
-    "tslint-loader": "2.1.5",
+    "tslint-loader": "3.4.2",
     "typescript": "2.2.0",
     "typings": "2.1.0",
     "webpack": "2.2.1",
     "webpack-dev-server": "2.4.1"
   },
   "dependencies": {
+    "@types/react": "15.0.11",
+    "@types/react-dom": "0.14.23",
     "bootstrap": "3.3.7",
     "react": "15.4.2",
     "react-dom": "15.4.2"

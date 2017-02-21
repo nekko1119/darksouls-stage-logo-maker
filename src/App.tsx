@@ -90,12 +90,12 @@ class App extends React.Component<void, State> {
             });
         };
         reader.readAsDataURL(image.slice(0, image.size, image.type));
-    };
+    }
 
     private forwardImageSelect = () => {
         const element = document.getElementById(App.inputId);
         element!.click();
-    };
+    }
 };
 
 const element = document.getElementById("app");

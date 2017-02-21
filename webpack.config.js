@@ -18,51 +18,39 @@ module.exports = {
         filename: 'bundle.js'
     },
     resolve: {
-        extensions: ['', '.ts', '.tsx', '.js']
+        extensions: ['.ts', '.tsx', '.js']
     },
     module: {
-        preLoaders: [
+        rules: [
             {
                 test: /\.tsx?$/,
+                enforce: 'pre',
                 exclude: /node_modules/,
-                loaders: [
-                    'tslint'
-                ]
+                loader: 'tslint-loader'
             },
             {
                 test: /\.js$/,
-                loaders: [
-                    'source-map'
-                ]
-            }
-        ],
-        loaders: [
+                enforce: 'pre',
+                loader: 'source-map-loader'
+            },
             {
                 test: /\.tsx?$/,
                 exclude: /node_modules/,
-                loaders: [
-                    'ts'
-                ]
-            },
-            {
-                test: /\.js$/,
-                exclude: /node_modules/,
-                loaders: [
-                    'babel'
-                ]
+                loader: 'ts-loader'
             },
             {
                 test: /\.css$/,
-                loaders: [
-                    'style',
-                    'css'
+                use: [
+                    'style-loader',
+                    'css-loader'
                 ]
             },
             {
                 test: /\.(ico|jpg|jpeg|png|gif|eot|svg|ttf|woff|woff2)(\?.*)?$/,
-                loaders: [
-                    'file?name=[path][name].[ext]'
-                ]
+                loader: 'file-loader',
+                options: {
+                    name: '[path][name].[ext]'
+                }
             }
         ]
     },
@@ -70,7 +58,5 @@ module.exports = {
         port: 3000,
         publicPath: './dist'
     },
-    devtool: [
-        'source-map'
-    ]
+    devtool: 'source-map'
 };
