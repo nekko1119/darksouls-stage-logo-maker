@@ -25,7 +25,8 @@ module.exports = {
             {
                 test: /\.tsx?$/,
                 enforce: 'pre',
-                exclude: /node_modules/,
+                exclude: path.resolve(__dirname, "node_modules"),
+                include: path.resolve(__dirname, "src"),
                 loader: 'tslint-loader'
             },
             {
@@ -56,7 +57,9 @@ module.exports = {
     },
     devServer: {
         port: 3000,
-        publicPath: './dist'
+        publicPath: './dist',
+        inline: true,
+        hot: true,
     },
     devtool: 'source-map'
 };

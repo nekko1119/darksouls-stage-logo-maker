@@ -3,31 +3,30 @@
   "version": "0.0.1",
   "description": "",
   "scripts": {
-    "build": "typings install && webpack --display-error-detail --progress --colors",
-    "watch": "typings install && webpack-dev-server",
+    "build": " webpack --display-error-details --progress --colors",
+    "watch": "webpack-dev-server",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "nekko1119",
   "license": "MIT",
   "devDependencies": {
-    "css-loader": "0.26.1",
-    "file-loader": "0.9.0",
-    "react-hot-loader": "3.0.0-beta.6",
-    "source-map-loader": "0.1.6",
-    "style-loader": "0.13.1",
-    "ts-loader": "2.0.0",
-    "tslint": "4.4.2",
-    "tslint-loader": "3.4.2",
-    "typescript": "2.2.0",
-    "typings": "2.1.0",
-    "webpack": "2.2.1",
-    "webpack-dev-server": "2.4.1"
+    "css-loader": "^0.28.4",
+    "file-loader": "^0.11.2",
+    "react-hot-loader": "^3.0.0-beta.6",
+    "source-map-loader": "^0.2.1",
+    "style-loader": "^0.18.2",
+    "ts-loader": "^2.1.0",
+    "tslint": "^5.4.3",
+    "tslint-loader": "^3.5.3",
+    "typescript": "^2.3.4",
+    "webpack": "^2.6.1",
+    "webpack-dev-server": "^2.4.5"
   },
   "dependencies": {
-    "@types/react": "15.0.11",
-    "@types/react-dom": "0.14.23",
-    "bootstrap": "3.3.7",
-    "react": "15.4.2",
-    "react-dom": "15.4.2"
+    "@types/react": "^15.0.28",
+    "@types/react-dom": "^15.5.0",
+    "bootstrap": "^3.3.7",
+    "react": "^15.4.2",
+    "react-dom": "^15.4.2"
   }
 }

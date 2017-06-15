@@ -3,9 +3,9 @@ import * as React from "react";
 interface Props {
     visible: boolean;
     onChange: (e?: any) => void;
-};
+}
 
-export class Component extends React.Component<Props, any> {
+export class Component extends React.Component<Props, {}> {
     public render() {
         if (!this.props.visible) {
             // workaround
@@ -24,4 +24,4 @@ export class Component extends React.Component<Props, any> {
             </div>
         );
     }
-};
+}

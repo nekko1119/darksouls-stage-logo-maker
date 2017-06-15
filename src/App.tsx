@@ -7,7 +7,7 @@ import "bootstrap/dist/css/bootstrap.css";
 interface State {
     dataUrl?: string;
     stage?: string;
-};
+}
 
 const Preview = ({dataUrl}: {dataUrl?: string}) => (
     // workaround
@@ -16,7 +16,7 @@ const Preview = ({dataUrl}: {dataUrl?: string}) => (
     dataUrl ? <img src={dataUrl} className="img-thumbnail" /> : null!
 );
 
-class App extends React.Component<void, State> {
+class App extends React.Component<{}, State> {
 
     private static inputId = "upload-file";
 
@@ -96,7 +96,7 @@ class App extends React.Component<void, State> {
         const element = document.getElementById(App.inputId);
         element!.click();
     }
-};
+}
 
 const element = document.getElementById("app");
 
