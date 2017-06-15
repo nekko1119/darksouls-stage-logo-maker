@@ -1,5 +1,4 @@
 import * as React from "react";
-import * as ReactDOM from "react-dom";
 import * as TextInput from "./TextInput";
 
 import "bootstrap/dist/css/bootstrap.css";
@@ -16,7 +15,7 @@ const Preview = ({dataUrl}: {dataUrl?: string}) => (
     dataUrl ? <img src={dataUrl} className="img-thumbnail" /> : null!
 );
 
-class App extends React.Component<{}, State> {
+export default class App extends React.Component<{}, State> {
 
     private static inputId = "upload-file";
 
@@ -97,7 +96,3 @@ class App extends React.Component<{}, State> {
         element!.click();
     }
 }
-
-const element = document.getElementById("app");
-
-ReactDOM.render(<App />, element!);

@@ -3,11 +3,8 @@
 ## TODO
 
 - 環境構築
-    - ReactのHMRが効くようにする
     - production用webpack.config.jsを作成し呼び分けられるようにする
         - production用webpack.config.jsではunglifyする
-    - testを動かせるようにする
-    - css周りどうするの
 - 機能
     - 画像をドラック&ドロップできるようにする
     - 文字と棒を重ねられるようにする
