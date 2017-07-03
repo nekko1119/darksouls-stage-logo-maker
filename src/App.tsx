@@ -1,16 +1,13 @@
 import * as React from "react";
-import * as TextInput from "./TextInput";
+import Canvas from "./Canvas";
+import TextInput from "./TextInput";
 
 import "bootstrap/dist/css/bootstrap.css";
 
 interface State {
     dataUrl?: string;
-    stage?: string;
+    stageName?: string;
 }
-
-const Preview = ({dataUrl}: {dataUrl?: string}) => (
-    dataUrl ? <img src={dataUrl} className="img-thumbnail" /> : null
-);
 
 export default class App extends React.Component<{}, State> {
 
@@ -22,6 +19,10 @@ export default class App extends React.Component<{}, State> {
     }
 
     public render() {
+        const {
+            dataUrl,
+        } = this.state;
+
         return (
             <div className="container">
                 <h1>DARK SOULS風にステージロゴを画像に重ねる</h1>
@@ -49,13 +50,15 @@ export default class App extends React.Component<{}, State> {
                                 画像を選択
                             </button>
                         </div>
-                        <TextInput.Component
+                        <TextInput
                             visible={!!this.state.dataUrl}
                             onChange={this.handleTextChange}
                         />
                     </div>
                     <div className="col-md-8">
-                        <Preview dataUrl={this.state.dataUrl} />
+                        {
+                            dataUrl ? <Canvas dataUrl={dataUrl} /> : null
+                        }
                     </div>
                 </div>
             </div>

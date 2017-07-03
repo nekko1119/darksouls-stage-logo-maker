@@ -5,7 +5,7 @@ interface Props {
     onChange: (e?: any) => void;
 }
 
-export class Component extends React.Component<Props, {}> {
+export default class Component extends React.Component<Props, {}> {
     public render() {
         if (!this.props.visible) {
             return null;
