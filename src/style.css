@@ -1,0 +1,8 @@
+body {
+    background-color: rgb(48, 48, 48);
+}
+
+.base {
+    color: rgb(222, 222, 222);
+    font-family: "ヒラギノ明朝 ProN W6", "HiraMinProN-W6", "HG明朝E", "ＭＳ Ｐ明朝", "MS PMincho", "MS 明朝", serif;
+}

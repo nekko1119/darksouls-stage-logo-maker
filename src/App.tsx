@@ -3,10 +3,12 @@ import Canvas from "./Canvas";
 import TextInput from "./TextInput";
 
 import "bootstrap/dist/css/bootstrap.css";
+import "./style.css";
 
 interface State {
     dataUrl?: string;
-    stageName?: string;
+    stageName: string;
+    canvas?: HTMLCanvasElement;
 }
 
 export default class App extends React.Component<{}, State> {
@@ -15,23 +17,20 @@ export default class App extends React.Component<{}, State> {
 
     constructor() {
         super();
-        this.state = {};
+        this.state = {
+            stageName: "",
+        };
     }
 
     public render() {
         const {
             dataUrl,
+            stageName,
         } = this.state;
 
         return (
             <div className="container">
-                <h1>DARK SOULS風にステージロゴを画像に重ねる</h1>
-                <div
-                    className="alert alert-warning"
-                    role="alert"
-                >
-                    未完成！
-                </div>
+                <h1 className="base">DARK SOULS風に画像に文字列を重ねる</h1>
                 <input
                     id={App.inputId}
                     type="file"
@@ -50,25 +49,49 @@ export default class App extends React.Component<{}, State> {
                                 画像を選択
                             </button>
                         </div>
-                        <TextInput
-                            visible={!!this.state.dataUrl}
-                            onChange={this.handleTextChange}
-                        />
+                        {
+                            dataUrl ? (
+                                <div>
+                                    <TextInput
+                                        onChange={this.handleTextChange}
+                                    />
+                                    <a
+                                        type="button"
+                                        className="btn btn-primary form-group"
+                                        download="darksouls-stage-logo-image.png"
+                                        target="_blank"
+                                        onClick={this.saveImage}
+                                    >
+                                        画像を保存
+                                    </a>
+                                </div>
+                            ) : null
+                        }
                     </div>
                     <div className="col-md-8">
                         {
-                            dataUrl ? <Canvas dataUrl={dataUrl} /> : null
+                            dataUrl ? (
+                                <Canvas
+                                    dataUrl={dataUrl}
+                                    stageName={stageName}
+                                    onCanvasChange={this.handleCanvasChange}
+                                />
+                            ) : null
                         }
                     </div>
                 </div>
+                <p className="base">更新履歴</p>
+                <ul>
+                    <li className="base">2017/mm/dd v0.1.0 公開</li>
+                </ul>
             </div>
         );
     }
 
-    private handleTextChange = (e: any) => {
-        const text = e.target.value;
+    private handleTextChange = (e: React.FormEvent<HTMLInputElement>) => {
+        const text = e.currentTarget.value;
         this.setState({
-            stage: text,
+            stageName: text,
         });
     }
 
@@ -94,5 +117,20 @@ export default class App extends React.Component<{}, State> {
     private forwardImageSelect = () => {
         const element = document.getElementById(App.inputId);
         element!.click();
+    }
+
+    private handleCanvasChange = (canvas: HTMLCanvasElement) => {
+        this.setState({
+            canvas,
+        });
+    }
+
+    private saveImage = (e: React.MouseEvent<HTMLAnchorElement>) => {
+        if (!this.state.canvas) {
+            return;
+        }
+        const a = e.currentTarget;
+        a.download = "darksouls-stage-logo-image.png";
+        a.href = this.state.canvas.toDataURL("image/png");
     }
 }

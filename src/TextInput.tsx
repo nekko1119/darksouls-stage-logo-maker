@@ -1,15 +1,11 @@
 import * as React from "react";
 
 interface Props {
-    visible: boolean;
-    onChange: (e?: any) => void;
+    onChange: (e: React.FormEvent<HTMLInputElement>) => void;
 }
 
 export default class Component extends React.Component<Props, {}> {
     public render() {
-        if (!this.props.visible) {
-            return null;
-        }
         return (
             <div className="form-group">
                 <input
