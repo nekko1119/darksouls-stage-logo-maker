@@ -8,10 +8,7 @@ interface Props {
 export class Component extends React.Component<Props, {}> {
     public render() {
         if (!this.props.visible) {
-            // workaround
-            // react的にはnullは許可されているが、typescript2系では不許可されている不具合がある
-            // nullをnullではないと表明することで対処できる
-            return null!;
+            return null;
         }
         return (
             <div className="form-group">

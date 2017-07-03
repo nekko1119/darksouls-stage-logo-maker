@@ -9,10 +9,7 @@ interface State {
 }
 
 const Preview = ({dataUrl}: {dataUrl?: string}) => (
-    // workaround
-    // react的にはnullは許可されているが、typescript2系では不許可されている不具合がある
-    // nullをnullではないと表明することで対処できる
-    dataUrl ? <img src={dataUrl} className="img-thumbnail" /> : null!
+    dataUrl ? <img src={dataUrl} className="img-thumbnail" /> : null
 );
 
 export default class App extends React.Component<{}, State> {
