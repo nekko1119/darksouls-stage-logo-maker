@@ -6,14 +6,10 @@ const MAX_CANVAS_SIZE = 640;
 interface Props {
     dataUrl: string;
     stageName: string;
-    onCanvasChange: (canvas: HTMLCanvasElement) => void;
+    setCanvas: (canvas: HTMLCanvasElement) => void;
 }
 
-interface State {
-    context: CanvasRenderingContext2D;
-}
-
-export default class Canvas extends React.Component<Props, State> {
+export default class Canvas extends React.Component<Props, {}> {
 
     private canvasRef: HTMLCanvasElement;
 
@@ -23,12 +19,11 @@ export default class Canvas extends React.Component<Props, State> {
 
     public componentWillReceiveProps(nextProps: Props) {
         this.drawImage(nextProps.dataUrl);
-        this.props.onCanvasChange(this.canvasRef);
     }
 
     public componentDidMount() {
         this.drawImage(this.props.dataUrl);
-        this.props.onCanvasChange(this.canvasRef);
+        this.props.setCanvas(this.canvasRef);
     }
 
     public render() {
@@ -44,7 +39,6 @@ export default class Canvas extends React.Component<Props, State> {
         if (!ctx) {
             return;
         }
-        this.setState({ context: ctx });
         const image = new Image();
         image.src = dataUrl;
         image.onload = () => {
@@ -60,12 +54,14 @@ export default class Canvas extends React.Component<Props, State> {
             ctx.fillStyle = "white";
             ctx.strokeStyle = "black";
             ctx.textAlign = "center";
-            ctx.fillText(this.props.stageName, canvas.width / 2, canvas.height / 2, canvas.width);
-            ctx.strokeText(this.props.stageName, canvas.width / 2, canvas.height / 2, canvas.width);
+            // 下線のために前後に空白を追加する
+            const text = `　${this.props.stageName}　`;
+            ctx.fillText(text, canvas.width / 2, canvas.height / 2, canvas.width);
+            ctx.strokeText(text, canvas.width / 2, canvas.height / 2, canvas.width);
             this.drawUnderLine({
                 canvas,
                 ctx,
-                text: this.props.stageName,
+                text,
                 textHeight: height / 11,
             });
         };

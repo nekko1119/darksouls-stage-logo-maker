@@ -11,6 +11,15 @@ interface State {
     canvas?: HTMLCanvasElement;
 }
 
+const ReleaseNotes = () => (
+    <div className="base release-note">
+        <h3>更新履歴</h3>
+        <ul>
+            <li className="base">2017/mm/dd v0.1.0 公開</li>
+        </ul>
+    </div>
+);
+
 export default class App extends React.Component<{}, State> {
 
     private static inputId = "upload-file";
@@ -30,7 +39,10 @@ export default class App extends React.Component<{}, State> {
 
         return (
             <div className="container">
-                <h1 className="base">DARK SOULS風に画像に文字列を重ねる</h1>
+                <h1 className="base">DARK SOULSのステージ表示風に画像に文字列を重ねる</h1>
+                <div className="alert alert-warning" role="alert">
+                    <strong>注意</strong> 高解像度の画像を使用すると重くなります
+                </div>
                 <input
                     id={App.inputId}
                     type="file"
@@ -74,16 +86,13 @@ export default class App extends React.Component<{}, State> {
                                 <Canvas
                                     dataUrl={dataUrl}
                                     stageName={stageName}
-                                    onCanvasChange={this.handleCanvasChange}
+                                    setCanvas={this.setCanvas}
                                 />
                             ) : null
                         }
                     </div>
                 </div>
-                <p className="base">更新履歴</p>
-                <ul>
-                    <li className="base">2017/mm/dd v0.1.0 公開</li>
-                </ul>
+                <ReleaseNotes />
             </div>
         );
     }
@@ -119,7 +128,7 @@ export default class App extends React.Component<{}, State> {
         element!.click();
     }
 
-    private handleCanvasChange = (canvas: HTMLCanvasElement) => {
+    private setCanvas = (canvas: HTMLCanvasElement) => {
         this.setState({
             canvas,
         });
@@ -130,7 +139,6 @@ export default class App extends React.Component<{}, State> {
             return;
         }
         const a = e.currentTarget;
-        a.download = "darksouls-stage-logo-image.png";
         a.href = this.state.canvas.toDataURL("image/png");
     }
 }
