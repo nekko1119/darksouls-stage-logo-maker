@@ -9,9 +9,6 @@
 
 ## TODO
 
-- 環境構築
-    - production用webpack.config.jsを作成し呼び分けられるようにする
-        - production用webpack.config.jsではunglifyする
 - 機能
     - 画像をドラック&ドロップできるようにする
     - 画像をwebから取れるようにする

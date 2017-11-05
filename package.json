@@ -4,6 +4,7 @@
   "description": "",
   "scripts": {
     "build": " webpack --display-error-details --progress --colors",
+    "build:production": "cross-env NODE_ENV=production webpack --display-error-details --progress --colors",
     "watch": "webpack-dev-server --open",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -28,6 +29,7 @@
   },
   "dependencies": {
     "bootstrap": "^3.3.7",
+    "cross-env": "^5.1.1",
     "react": "^15.4.2",
     "react-dom": "^15.4.2"
   }

@@ -2,21 +2,44 @@ const webpack = require('webpack');
 const path = require('path');
 
 module.exports = {
-  entry: [
-    'react-hot-loader/patch',
-    'webpack-dev-server/client?http://localhost:3000',
-    'webpack/hot/only-dev-server',
+  entry: [...(
+    process.env.NODE_ENV !== 'production' ? [
+      'react-hot-loader/patch',
+      'webpack-dev-server/client?http://localhost:3000',
+      'webpack/hot/only-dev-server'
+    ] : []
+  ),
     './src/index.tsx'
   ],
   cache: true,
   plugins: [
+    new webpack.DefinePlugin({
+      'process.env': {
+        NODE_ENV: JSON.stringify(process.env.NODE_ENV)
+      }
+    }),
     new webpack.ProvidePlugin({
       $: 'jquery',
       jQuery: 'jquery'
     }),
-    new webpack.HotModuleReplacementPlugin(),
-    new webpack.NamedModulesPlugin(),
-    new webpack.NoEmitOnErrorsPlugin(),
+    ...(
+      process.env.NODE_ENV !== 'production' ? [
+        new webpack.HotModuleReplacementPlugin(),
+        new webpack.NamedModulesPlugin(),
+        new webpack.NoEmitOnErrorsPlugin()
+      ] : []
+    ),
+    ...(
+      process.env.NODE_ENV === 'production' ? [
+        new webpack.optimize.UglifyJsPlugin({
+          compress: {
+            warnings: false
+          }
+        }),
+        new webpack.optimize.OccurrenceOrderPlugin(),
+        new webpack.optimize.AggressiveMergingPlugin()
+      ] : []
+    )
   ],
   output: {
     path: path.join(__dirname, 'dist'),
@@ -50,7 +73,7 @@ module.exports = {
       {
         test: /\.css$/,
         use: [
-          'react-hot-loader/webpack',
+          ...(process.env.NODE_ENV !== 'production' ? ['react-hot-loader/webpack'] : []),
           'style-loader',
           'css-loader'
         ]
