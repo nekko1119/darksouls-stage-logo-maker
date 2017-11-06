@@ -2,8 +2,8 @@ import * as React from "react";
 import Canvas from "./Canvas";
 import TextInput from "./TextInput";
 
-import "bootstrap/dist/css/bootstrap.css";
-import "./style.css";
+import "bootstrap/dist/css/bootstrap.min";
+import "./style";
 
 interface State {
     dataUrl?: string;
